@@ -29,7 +29,7 @@ pipeline{
 		}
 		stage("testing"){
 			steps{
-				docker run -dit -p  80:80  amansingh12/hoster:BUILD_TAG
+				sh  'sudo docker run -dit -p  80:80  amansingh12/hoster:BUILD_TAG'
 			}
 		}
 		
