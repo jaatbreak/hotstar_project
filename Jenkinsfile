@@ -29,7 +29,14 @@ pipeline{
 		}
 		stage("testing"){
 			steps{
-				sh  'sudo docker run -dit -p  80:80  amansingh12/hoster:BUILD_TAG'
+				sh  'sudo docker run -dit --name=m1 -p  80:80  amansingh12/hoster:BUILD_TAG'
+			}
+		}
+		stage("installing java inside the container "){
+			steps{
+				sh 'sudo docker exec -it m1 bash'
+				sh 'apt update'
+				sh 'apt install default-jdk'
 			}
 		}
 		
