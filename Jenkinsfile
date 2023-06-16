@@ -4,7 +4,7 @@ pipeline{
     }
     stages{
         stage("Pulling code from git"){
-            step{
+            steps{
                 git branch: 'main', credentialsId: 'devops_m1', url: 'https://github.com/jaatbreak/hotstar_project.git'
             }
         }
