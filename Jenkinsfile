@@ -24,12 +24,12 @@ pipeline{
 				withCredentials([string(credentialsId: 'docker_hub', variable: 'docker_var')]){
 					sh 'sudo docker login -u amansingh12 -p $docker_var'
 					sh 'sudo docker push amansingh12/hoster:BUILD_TAG'
-				}
+				} 
 			}
 		}
 		stage("testing"){
 			steps{
-				docker run -dit -p :80  amansingh12/hoster:BUILD_TAG
+				docker run -dit -p  80:80  amansingh12/hoster:BUILD_TAG
 			}
 		}
 		
