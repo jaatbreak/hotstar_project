@@ -13,17 +13,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Apache
+      - name: Install Apache and Java Runtime Environment (JRE)
         run: |
              sudo apt-get update && sudo apt-get install -y apache2
              sudo apt-get install default-jre -y
-             
+
+      - name: Enable Firewall
+        run: sudo ufw enable
+
+      - name: Allow traffic on port 80
+        run: sudo ufw allow 80/tcp
+
       - name: Copy files to Apache document root
-        run: sudo cp  ./index.html /var/www/html/
+        run: sudo cp index.html /var/www/html/
 
       - name: Restart Apache
-        run: |
-           sudo service apache2 restart
-           sudo curl ifconfig.me
-           sudo curl localhost
-          
+        run: sudo service apache2 restart
+
+      - name: Display Server IP
+        run: sudo curl ifconfig.me
+
+      - name: Display localhost
+        run: sudo curl localhost
+
+      - name: Show Public URL
+        run: echo "Your website is accessible at: http://$(sudo curl -s ifconfig.me)"
