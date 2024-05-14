@@ -15,8 +15,12 @@ jobs:
 
       - name: Install Apache and Java Runtime Environment (JRE)
         run: |
-             sudo apt-get update && sudo apt-get install -y apache2
+             sudo apt-get update
+             sudo apt-get install -y apache2
              sudo apt-get install default-jre -y
+
+      - name: Remove conflicting package
+        run: sudo apt-get remove -y containerd.io
 
       - name: Enable Firewall
         run: sudo ufw enable
@@ -28,7 +32,7 @@ jobs:
         run: sudo cp index.html /var/www/html/
 
       - name: Restart Apache
-        run: sudo systemctl reload apache2
+        run: sudo service apache2 restart
 
       - name: Display Server IP
         run: sudo curl ifconfig.me
@@ -36,3 +40,5 @@ jobs:
       - name: Display localhost
         run: sudo curl localhost
 
+      - name: Show Public URL
+        run: echo "Your website is accessible at: http://$(sudo curl -s ifconfig.me)"
