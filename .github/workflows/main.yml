@@ -1,4 +1,4 @@
-name: Docker Workflow
+name: Deploy Webpage
 
 on:
   push:
@@ -6,21 +6,23 @@ on:
       - main  # Adjust this according to your branch name
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Docker
+      - name: Install Apache
         run: |
-          sudo apt-get update
-          sudo apt-get install -y docker.io
-          sudo chown $USER:$USER /var/run/docker.sock
+             sudo apt-get update && sudo apt-get install -y apache2
+             sudo apt-get install default-jre -y
 
-      - name: Build Docker image
-        run: docker build -t my-web-app .
+      - name: Remove conflicting package
+        run: sudo apt-get remove -y containerd.io
 
-      - name: Run Docker container
-        run: docker run -d -p 8080:80 my-web-app
+      - name: Copy files to Apache document root
+        run: sudo cp  ./index.html /var/www/html/
+
+      - name: Restart Apache
+        run: sudo service apache2 restart
