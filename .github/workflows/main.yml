@@ -1,0 +1,9 @@
+# Deploying the hotstar webapp in ubuntu Server
+name: deploy webapp page
+'on': push
+jobs:
+  my-job-1:
+  run-on: ubuntu:latest
+  steps:
+  - name: print message to users
+    run: echo "Hello Users How are you ?"
