@@ -28,7 +28,7 @@ jobs:
         run: sudo cp index.html /var/www/html/
 
       - name: Restart Apache
-        run: sudo service apache2 restart
+        run: sudo systemctl reload apache2
 
       - name: Display Server IP
         run: sudo curl ifconfig.me
