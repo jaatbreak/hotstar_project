@@ -36,5 +36,3 @@ jobs:
       - name: Display localhost
         run: sudo curl localhost
 
-      - name: Show Public URL
-        run: echo "Your website is accessible at: http://$(sudo curl -s ifconfig.me)"
