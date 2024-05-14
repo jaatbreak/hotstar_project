@@ -9,8 +9,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Installing Webserver #(Apache) 
-        run: sudo apt-get autoremove -y apache2
-      #- name:  start & enable service 
-       # run: sudo systemctl start apache2 && sudo systemctl enable apache2
+      - name: Installing Docker Engine 
+        run: sudo apt update && sudo apt install -y docker.io
+      - name:  start & enable service 
+        run: sudo systemctl start docker && sudo systemctl enable docker
+      - name: provide permission to the user 
+        run: sudo chown $USER:$USER /var/run/docker.sock
+      - name: Building The Docker File
+        run: docker build -t hotstar_test .
+      - name: Running the container of the image
+        run: docker run -dit -p 8080:8080 hotstar_test  && docker ps
         
