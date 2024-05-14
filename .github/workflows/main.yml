@@ -17,12 +17,13 @@ jobs:
         run: |
              sudo apt-get update && sudo apt-get install -y apache2
              sudo apt-get install default-jre -y
-
-      - name: Remove conflicting package
-        run: sudo apt-get remove -y containerd.io
-
+             
       - name: Copy files to Apache document root
         run: sudo cp  ./index.html /var/www/html/
 
       - name: Restart Apache
-        run: sudo service apache2 restart
+        run: |
+           sudo service apache2 restart
+           sudo curl ifconfig.me
+           sudo curl localhost
+          
