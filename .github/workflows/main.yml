@@ -1,9 +1,16 @@
-# Deploying the hotstar webapp in ubuntu Server
-name: deploy webapp page
-'on': push
+name: Deploy Webpage
+
+on:
+  push:
+    branches:
+      - main  # Adjust this according to your branch name
+
 jobs:
-  my-job-1:
-  run-on: ubuntu:latest
-  steps:
-  - name: print message to users
-    run: echo "Hello Users How are you ?"
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Print name 
+        run: echo 'hello world'
