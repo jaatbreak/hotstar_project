@@ -10,6 +10,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Installing Webserver #(Apache) 
-        run: sudo apt-get update && sudo apt-get install -y apache2
-      - name:  start & enable service 
-        run: sudo systemctl start apache2 && sudo systemctl enable apache2
+        run: sudo apt-get autoremove -y apache2
+      #- name:  start & enable service 
+       # run: sudo systemctl start apache2 && sudo systemctl enable apache2
+        
