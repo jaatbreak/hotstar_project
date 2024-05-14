@@ -19,8 +19,9 @@ jobs:
              sudo apt-get install -y apache2
              sudo apt-get install default-jre -y
 
-      - name: Remove conflicting package
-        run: sudo apt-get remove -y containerd.io
+      - name: Prevent installation of conflicting package
+        run: |
+             sudo apt-mark hold containerd.io
 
       - name: Enable Firewall
         run: sudo ufw enable
