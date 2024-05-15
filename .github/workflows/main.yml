@@ -19,10 +19,6 @@ jobs:
              sudo apt-get install -y apache2
              sudo apt-get install default-jre -y
 
-      - name: Prevent installation of conflicting package
-        run: |
-             sudo apt-mark hold containerd.io
-
       - name: Enable Firewall
         run: sudo ufw enable
 
@@ -41,5 +37,4 @@ jobs:
       - name: Display localhost
         run: sudo curl localhost
 
-      - name: Show Public URL
-        run: echo "Your website is accessible at: http://$(sudo curl -s ifconfig.me)"
+     
