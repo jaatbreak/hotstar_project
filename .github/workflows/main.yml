@@ -37,4 +37,11 @@ jobs:
       - name: Display localhost
         run: sudo curl localhost
 
+      - name: check port no server 
+        run: |
+           sudo apt install net-tools -y
+           sudo netstat -tnlp 
+           sudo ufw status
+        
+
      
